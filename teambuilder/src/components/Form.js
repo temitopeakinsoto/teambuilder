@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function Form(props) {
-  const { onSubmit, onChange, newMember } = props;
+  const { onSubmit, onChange, newMember, isEnabled } = props;
   const { fullname, email } = newMember;
   return (
     <form>
@@ -18,14 +18,14 @@ export default function Form(props) {
       <input id="emailInput" name="email" onChange={onChange} value={email} />
       <br />
 
-      <select>
+      <select id="roleInput" name="role" onChange={onChange}>
         <option></option>
-        <option>FRONT END</option>
-        <option>BACK END</option>
-        <option>FULL STACK</option>
+        <option value="Front End">FRONT END</option>
+        <option value="Back End">BACK END</option>
+        <option value="Full Stack">FULL STACK</option>
       </select>
 
-        <button onClick={onSubmit}>Submit</button>
+        <button disabled={isEnabled()} onClick={onSubmit}>Submit</button>
     </form>
   );
 }

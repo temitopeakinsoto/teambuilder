@@ -57,16 +57,22 @@ function App() {
 
   const onSubmit = e => {
     e.preventDefault();
-    const { email, fullname } = newMember;
+    const { email, fullname, role } = newMember;
     const newMemberToBeAdded = {
       id: uuid(),
       fullname,
-      email
+      email,
+      role
     };
     const newMembersList = membersList.concat(newMemberToBeAdded);
     setMembersList(newMembersList);
     setNewMember(memberFormInput)
   };
+
+  const isEnabled = () => {
+    const { email, fullname, role } = newMember;
+    return(!fullname || !email || !role)
+  }
 
   return (
     <div className="App">
@@ -75,10 +81,11 @@ function App() {
         onChange={onChange}
         onSubmit={onSubmit}
         newMember={newMember}
+        isEnabled={isEnabled}
       />
       {membersList.map(member => (
         <Member
-          id={member.id}
+          key={member.id}
           fullname={member.fullname}
           email={member.email}
           role={member.role}
